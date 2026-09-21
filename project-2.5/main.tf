@@ -14,6 +14,7 @@ provider "aws" {
 
 resource "aws_ecr_repository" "abac_boto3_demo" {
     name = "abac-boto3-demo"
+    force_delete = true
 }
 
 resource "aws_iam_role" "ecs_execution_role" {
