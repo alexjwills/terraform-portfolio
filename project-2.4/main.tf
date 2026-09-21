@@ -45,13 +45,18 @@ resource "aws_iam_policy" "abac_shared_policy" {
     Statement = [
       {
         Effect   = "Allow"
-        Action   = ["s3:GetObject", "s3:ListBucket"]
+        Action   = "s3:GetObject"
         Resource = "arn:aws:s3:::${var.bucket_name}/*"
         Condition = {
           StringEquals = {
             "s3:ExistingObjectTag/department" = "$${aws:PrincipalTag/department}"
           }
         }
+      },
+      {
+        Effect   = "Allow"
+        Action   = "s3:ListBucket"
+        Resource = "arn:aws:s3:::${var.bucket_name}"
       }
     ]
   })
